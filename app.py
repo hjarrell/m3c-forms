@@ -71,8 +71,8 @@ def upload_image():
         <title>Upload a new picture</title>
     </head>
     <body>
-        <title>Upload new File</title>
-        <h1>Upload new File</h1>
+        <h1>Upload new profile picture</h1>
+        <a href="/">Back to Home</a>
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 {% for message in messages %}
@@ -179,6 +179,7 @@ def create_person():
     </head>
     <body>
         <h1>Create a new Person</h1>
+        <a href="/">Back to Home</a>
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 {% for message in messages %}
