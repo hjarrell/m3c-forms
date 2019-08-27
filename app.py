@@ -18,7 +18,18 @@ app.secret_key = secret_key
 
 @app.route('/')
 def main_menu():
-    return ''
+    return '''
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title>M3C Admin Form</title>
+        </head>
+        <body>
+            <h1>M3C Admin Form</h1>
+            <button onclick="window.location.href = '/uploadimage'">Upload Profile Picture</button>
+        </body>
+    </html>
+    '''
 
 @app.route('/uploadimage', methods=['GET', 'POST'])
 def upload_image():
@@ -31,7 +42,7 @@ def upload_image():
             picture_file.save('{}/'.format(picture_path) + secure_filename('{}_{}.{}'.format(last_name, first_name, extension)))
             flash('Completed save sucessfully')
             return redirect(request.url)
-        except Exception as e:
+        except Exception:
             flash('Error uploading file')
             return redirect(request.url)
     
