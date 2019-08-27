@@ -1,17 +1,34 @@
+import sys
+
 from flask import Flask, request, flash, redirect, render_template_string
 from werkzeug.utils import secure_filename
 from yaml import safe_load
+import psycopg2
 
 CONFIG_FILE = 'config.yml'
 
 config_map = None
 picture_path = ''
 secret_key = ''
+db_host = ''
+db_database = ''
+db_user = ''
+db_password = ''
 
 with open(CONFIG_FILE, 'r') as f:
     config_map = safe_load(f)
     picture_path = config_map['picturepath']
     secret_key = config_map['secret']
+    db_host = config_map['dbhost']
+    db_database = config_map['dbdatabase']
+    db_user = config_map['dbuser']
+    db_password = config_map['dbpassword']
+
+try:
+    conn = psycopg2.connect(database=db_database, user=db_user, password=db_password, host=db_host)
+except:
+    print('Cannot connect to the database')
+    sys.exit(-1)
 
 app = Flask(__name__)
 app.secret_key = secret_key
@@ -72,5 +89,3 @@ def upload_image():
         </form>
     </body>
     ''')
-
-app

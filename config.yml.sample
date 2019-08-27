@@ -1,2 +1,7 @@
 picturepath: 'pictures'
 secret: 'secret_hex_string'
+
+dbhost: 'localhost'
+dbdatabase: 'm3c'
+dbuser: 'm3c'
+dbpassword: 'm3c'
